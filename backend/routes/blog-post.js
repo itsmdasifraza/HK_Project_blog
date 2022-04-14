@@ -111,7 +111,7 @@ router.get('/find/:slug',
     }   
 });
 
-router.get('/admin-verify/:slug', adminAuthToken,   
+router.get('/admin-verify-true/:slug', adminAuthToken,   
     async (req, res) => {
     try{
 		let changedAttribute = {
@@ -126,6 +126,27 @@ router.get('/admin-verify/:slug', adminAuthToken,
 		 else{
 			  return res.status(200).json({error:'404',
             mssg:"blog verified",
+           });
+		 }
+    }
+    catch{
+        return res.status(500).json({
+            mssg:"Internal server error"
+		});
+    }   
+});
+router.get('/admin-verify-false/:slug', adminAuthToken,   
+    async (req, res) => {
+    try{
+        var deleteBlogPost = await blogPostModel.findOneAndDelete({ slug : req.params.slug, verified : false });
+		if(!deleteBlogPost){
+            return res.status(404).json({error:'404',
+            mssg:"blog post not exist",
+           });
+         }
+		 else{
+			  return res.status(200).json({error:'404',
+            mssg:"blog deleted",
            });
 		 }
     }
