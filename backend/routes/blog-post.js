@@ -94,5 +94,21 @@ router.get('/find/unverified',
 		});
     }   
 });
+
+router.get('/find/:slug',    
+    async (req, res) => {
+    try{
+		var sbp = await blogPostModel.findOne({slug : req.params.slug, verified : true});
+		return res.status(200).json({
+			mssg:"Single blog post fetched",
+			data : sbp
+		});
+    }
+    catch{
+        return res.status(500).json({
+            mssg:"Internal server error"
+		});
+    }   
+});
 	
 module.exports = router;
