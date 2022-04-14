@@ -62,5 +62,21 @@ router.post('/create',
             });
         }
 });
+
+router.get('/find/verified',    
+    async (req, res) => {
+    try{
+		var bp = await blogPostModel.find({verified : true});
+		return res.status(200).json({
+			mssg:"blog post fetched",
+			data : bp
+		});
+    }
+    catch{
+        return res.status(500).json({
+            mssg:"Internal server error"
+		});
+    }   
+});
 	
 module.exports = router;
