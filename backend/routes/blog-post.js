@@ -110,5 +110,30 @@ router.get('/find/:slug',
 		});
     }   
 });
+
+router.get('/admin-verify/:slug', adminAuthToken,   
+    async (req, res) => {
+    try{
+		let changedAttribute = {
+            verified : true	
+        }
+        var updateBlogPost = await blogPostModel.findOneAndUpdate({slug : req.params.slug, verified : false }, changedAttribute);
+		if(!updateBlogPost){
+            return res.status(404).json({error:'404',
+            mssg:"blog not exist",
+           });
+         }
+		 else{
+			  return res.status(200).json({error:'404',
+            mssg:"blog verified",
+           });
+		 }
+    }
+    catch{
+        return res.status(500).json({
+            mssg:"Internal server error"
+		});
+    }   
+});
 	
 module.exports = router;
