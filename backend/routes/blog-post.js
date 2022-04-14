@@ -78,5 +78,21 @@ router.get('/find/verified',
 		});
     }   
 });
+
+router.get('/find/unverified',    
+    async (req, res) => {
+    try{
+		var bpu = await blogPostModel.find({verified : false});
+		return res.status(200).json({
+			mssg:"blog post fetched",
+			data : bpu
+		});
+    }
+    catch{
+        return res.status(500).json({
+            mssg:"Internal server error"
+		});
+    }   
+});
 	
 module.exports = router;
