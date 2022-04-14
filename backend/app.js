@@ -7,11 +7,7 @@ var sassMiddleware = require('node-sass-middleware');
 const connectMongo = require('./database/database');
 var cors = require('cors');
 
-//var blogCategoryRouter = require('./routes/blog-category');
-//var blogPostRouter = require('./routes/blog-post');
-//var projectCategoryRouter = require('./routes/project-category');
-//var projectPostRouter = require('./routes/project-post');
-//var customAdRouter = require('./routes/custom-ad');
+
 var registerUserRouter = require('./routes/register-user');
 var registerAdminRouter = require('./routes/register-admin');
 var blogPostRouter = require('./routes/blog-post');
